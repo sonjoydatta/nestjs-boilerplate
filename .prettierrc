@@ -1,0 +1,32 @@
+{
+  "arrowParens": "always",
+  "bracketSpacing": true,
+  "endOfLine": "auto",
+  "jsxSingleQuote": true,
+  "printWidth": 100,
+  "semi": true,
+  "useTabs": true,
+  "tabWidth": 2,
+  "trailingComma": "all",
+  "singleQuote": true,
+  "importOrder": [
+    "^(@nestjs/(.*)$)|^(@nestjs$)",
+    "<THIRD_PARTY_MODULES>",
+    "",
+    "^@libs/(.*)$",
+    "",
+    "^[./]"
+  ],
+  "importOrderSeparation": false,
+  "importOrderSortSpecifiers": true,
+  "importOrderBuiltinModulesToTop": true,
+  "importOrderParserPlugins": [
+    "typescript",
+    "decorators-legacy"
+  ],
+  "importOrderMergeDuplicateImports": true,
+  "importOrderCombineTypeAndValueImports": true,
+  "plugins": [
+    "@ianvs/prettier-plugin-sort-imports"
+  ]
+}

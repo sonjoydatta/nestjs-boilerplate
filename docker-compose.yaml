@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  database:
+    container_name: mongodb
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - ./backup:/data/db
+
+  backend:
+    container_name: api
+    build: ./
+    ports:
+      - 80:4000
+    depends_on:
+      - database
+    command: npm run start:prod

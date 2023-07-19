@@ -1,0 +1,11 @@
+{
+	"[typescript]": {
+		"editor.codeActionsOnSave": {
+			"source.fixAll": true,
+			"source.organizeImports": true
+		},
+		"editor.formatOnSave": true,
+		"editor.codeLens": true
+	},
+	"editor.defaultFormatter": "esbenp.prettier-vscode"
+}
