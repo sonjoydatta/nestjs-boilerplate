@@ -12,7 +12,7 @@ services:
     container_name: api
     build: ./
     ports:
-      - 80:4000
+      - 4000:4000
     depends_on:
       - database
     command: npm run start:prod
