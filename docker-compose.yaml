@@ -1,5 +1,13 @@
 version: '3.8'
 services:
+  redis:
+    container_name: cache
+    image: redis
+    ports:
+      - 6379:6379
+    volumes:
+      - ./backup:/redis/data
+
   database:
     container_name: mongodb
     image: mongo:latest
@@ -14,5 +22,10 @@ services:
     ports:
       - 4000:4000
     depends_on:
+      - redis
       - database
     command: npm run start:prod
+
+volumes:
+  redis:
+    driver: local

@@ -91,7 +91,8 @@
     ],
     "moduleNameMapper": {
       "^@libs/jwt(|/.*)$": "<rootDir>/libs/jwt/src/$1",
-      "^@libs/utils(|/.*)$": "<rootDir>/libs/utils/src/$1"
+      "^@libs/utils(|/.*)$": "<rootDir>/libs/utils/src/$1",
+      "^@libs/redis(|/.*)$": "<rootDir>/libs/redis/src/$1"
     }
   }
 }
