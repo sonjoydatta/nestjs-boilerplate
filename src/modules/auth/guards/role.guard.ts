@@ -14,14 +14,16 @@ export class RoleGuard implements CanActivate {
 
 		try {
 			const request: IRequest = context.switchToHttp().getRequest();
-			const userRole = request.userRole;
-			return this.matchRoles(roles, userRole);
+			const role = request?.user?.role;
+			if (!role) throw new BadRequestException('Your are not authorized to perform this action');
+
+			return this.matchRoles(roles, role);
 		} catch (error) {
 			throw new BadRequestException('Your are not authorized to perform this action');
 		}
 	}
 
-	private matchRoles(roles: (keyof typeof UserRoleEnum)[], userRole: UserRoleEnum) {
-		return roles.some((role) => UserRoleEnum[role] === userRole);
+	private matchRoles(roles: (keyof typeof UserRoleEnum)[], role: UserRoleEnum) {
+		return roles.some((i) => UserRoleEnum[i] === role);
 	}
 }

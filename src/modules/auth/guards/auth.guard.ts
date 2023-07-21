@@ -5,9 +5,13 @@ import { JwtService, TokenTypeEnum } from '@libs/jwt';
 
 import { UserRoleEnum } from '../../../common/enums';
 
+interface IRequestUser {
+	id: string;
+	role: UserRoleEnum;
+}
+
 export interface IRequest extends Request {
-	userId: string;
-	userRole: UserRoleEnum;
+	user?: IRequestUser;
 }
 
 @Injectable()
@@ -20,9 +24,11 @@ export class AuthGuard implements CanActivate {
 		if (!token) throw new UnauthorizedException('You are not authorized');
 
 		try {
-			const { id, role } = await this.jwtService.verify(token, TokenTypeEnum.ACCESS);
-			request.userId = id;
-			request.userRole = role as UserRoleEnum;
+			const { id, role } = (await this.jwtService.verify(
+				token,
+				TokenTypeEnum.ACCESS,
+			)) as IRequestUser;
+			request.user = { id, role };
 		} catch {
 			throw new UnauthorizedException('You are not authorized');
 		}
