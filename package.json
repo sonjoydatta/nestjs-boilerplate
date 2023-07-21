@@ -2,9 +2,13 @@
   "name": "nestjs-boilerplate",
   "version": "1.0.0",
   "description": "",
-  "author": "",
+  "author": {
+    "name": "Sonjoy Datta",
+    "email": "sonjoy.dat@gmail.com",
+    "url": "https://sonjoydatta.me"
+  },
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" \"libs/**/*.ts\"",
