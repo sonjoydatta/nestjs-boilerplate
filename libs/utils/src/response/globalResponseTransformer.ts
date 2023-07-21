@@ -13,7 +13,7 @@ export class GlobalResponseTransformer<T> implements NestInterceptor<T, Response
 			map((data) => ({
 				success: true,
 				data: data || null,
-				error: null,
+				message: null,
 			})),
 		);
 	}

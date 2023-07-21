@@ -7,6 +7,7 @@ import { JwtModule } from '@libs/jwt';
 import { getEnvPath } from './common/helper/env.helper';
 import config from './config';
 import { AuthModule } from './modules/auth/auth.module';
+import { MailModule } from './modules/mail/mail.module';
 import { UserModule } from './modules/user/user.module';
 
 const envFilePath = getEnvPath(`${__dirname}/common/envs`);
@@ -31,6 +32,7 @@ const envFilePath = getEnvPath(`${__dirname}/common/envs`);
 			inject: [ConfigService],
 		}),
 
+		MailModule,
 		AuthModule,
 		UserModule,
 	],

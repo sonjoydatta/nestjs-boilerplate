@@ -15,7 +15,8 @@ export const configSwagger = (app: INestApplication) => {
 		.build();
 
 	const document = SwaggerModule.createDocument(app, options);
-	SwaggerModule.setup('docs', app, document, {
+
+	SwaggerModule.setup('/', app, document, {
 		swaggerOptions: {
 			persistAuthorization: true,
 			syntaxHighlight: {

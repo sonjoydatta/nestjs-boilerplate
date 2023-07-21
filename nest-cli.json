@@ -6,19 +6,11 @@
     "deleteOutDir": true,
     "webpack": true,
     "assets": [
-      "common/envs/*"
+      "common/envs/*",
+      "modules/mail/templates/*"
     ]
   },
   "projects": {
-    "utils": {
-      "type": "library",
-      "root": "libs/utils",
-      "entryFile": "index",
-      "sourceRoot": "libs/utils/src",
-      "compilerOptions": {
-        "tsConfigPath": "libs/utils/tsconfig.lib.json"
-      }
-    },
     "jwt": {
       "type": "library",
       "root": "libs/jwt",
@@ -26,6 +18,15 @@
       "sourceRoot": "libs/jwt/src",
       "compilerOptions": {
         "tsConfigPath": "libs/jwt/tsconfig.lib.json"
+      }
+    },
+    "utils": {
+      "type": "library",
+      "root": "libs/utils",
+      "entryFile": "index",
+      "sourceRoot": "libs/utils/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/utils/tsconfig.lib.json"
       }
     }
   }

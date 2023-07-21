@@ -6,4 +6,5 @@ export default registerAs<AppConfig>('app', () => ({
 	env: process.env.NODE_ENV,
 	port: process.env.APP_PORT,
 	mongoURL: process.env.MONGO_URL,
+	clientURL: process.env.CLIENT_URL,
 }));

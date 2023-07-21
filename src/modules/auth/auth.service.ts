@@ -4,13 +4,18 @@ import { JwtPayload, JwtService, TokenTypeEnum } from '@libs/jwt';
 import { comparePassword } from '@libs/utils';
 
 import { UserRoleEnum } from '../../common/enums';
+import { MailService } from '../mail/mail.service';
 import { UserService } from '../user/user.service';
 import { AuthRegisterDto } from './dtos/auth.register.dto';
 import { AuthSignInDto } from './dtos/auth.signin.dto';
 
 @Injectable()
 export class AuthService {
-	constructor(private readonly userService: UserService, private readonly jwtService: JwtService) {}
+	constructor(
+		private readonly userService: UserService,
+		private readonly jwtService: JwtService,
+		private readonly mailService: MailService,
+	) {}
 
 	async register(payload: AuthRegisterDto) {
 		const user = await this.userService.create({ ...payload, role: UserRoleEnum.USER });
@@ -18,6 +23,13 @@ export class AuthService {
 		const [accessToken, refreshToken] = await this.generateAuthTokens({
 			id: user._id.toString(),
 			role: user.role,
+		});
+
+		this.mailService.sendRegisterConfirmation({
+			id: user._id.toString(),
+			role: user.role,
+			name: `${user.firstName} ${user.lastName}`,
+			email: user.email,
 		});
 
 		return { ...user, accessToken, refreshToken };
