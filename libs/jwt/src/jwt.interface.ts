@@ -22,6 +22,7 @@ export interface JwtVerifyResult extends JwtPayload {
 }
 
 export interface JwtModuleAsyncOptions {
+	isGlobal?: boolean;
 	useFactory?: (...args: any[]) => Promise<JwtConfig> | JwtConfig;
 	inject?: any[];
 }

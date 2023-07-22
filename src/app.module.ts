@@ -20,7 +20,8 @@ const envFilePath = getEnvPath(`${__dirname}/common/envs`);
 			envFilePath,
 		}),
 
-		JwtModule.forFeatureAsync({
+		JwtModule.forRootAsync({
+			isGlobal: true,
 			useFactory: async (configService: ConfigService) => configService.get('jwt'),
 			inject: [ConfigService],
 		}),
@@ -32,7 +33,12 @@ const envFilePath = getEnvPath(`${__dirname}/common/envs`);
 			inject: [ConfigService],
 		}),
 
-		MailModule,
+		MailModule.forRootAsync({
+			isGlobal: true,
+			useFactory: async (configService: ConfigService) => configService.get('mail'),
+			inject: [ConfigService],
+		}),
+
 		AuthModule,
 		UserModule,
 	],
