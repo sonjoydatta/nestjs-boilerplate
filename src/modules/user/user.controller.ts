@@ -20,7 +20,7 @@ export class UserController {
 	@Roles('ADMIN')
 	@Post()
 	async create(@Body() payload: UserCreateDto) {
-		return this.userService.create(payload);
+		return this.userService.create({ ...payload, password: null });
 	}
 
 	@ApiOperation({ summary: 'Update user by id - (ADMIN)' })

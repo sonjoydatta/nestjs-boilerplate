@@ -48,14 +48,6 @@ export class UserCreateDto {
 	readonly email: string;
 
 	@ApiProperty({
-		example: faker.internet.password(),
-		required: true,
-	})
-	@IsNotEmpty()
-	@MaxLength(50)
-	readonly password: string;
-
-	@ApiProperty({
 		example: faker.phone.number('62812#########'),
 		required: false,
 	})
@@ -84,4 +76,16 @@ export class UserCreateDto {
 	@IsOptional()
 	@Type(() => String)
 	readonly avatar?: string;
+}
+
+export class UserCreateWithPwdDto extends UserCreateDto {
+	@ApiProperty({
+		example: faker.internet.password(),
+		required: true,
+	})
+	@IsString()
+	@IsNotEmpty()
+	@MaxLength(50)
+	@Type(() => String)
+	readonly password: string;
 }

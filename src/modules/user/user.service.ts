@@ -6,7 +6,7 @@ import { InjectModel } from 'nestjs-typegoose';
 
 import { encryptPassword } from '@libs/utils';
 
-import { UserCreateDto } from './dtos/user.create.dto';
+import { UserCreateWithPwdDto } from './dtos/user.create.dto';
 import { UserUpdateDto } from './dtos/user.update.dto';
 import { UserEntity } from './user.entity';
 
@@ -17,7 +17,15 @@ export class UserService {
 		private readonly userModel: ReturnModelType<typeof UserEntity>,
 	) {}
 
-	async create({ firstName, lastName, email, password, phoneNumber, role, avatar }: UserCreateDto) {
+	async create({
+		firstName,
+		lastName,
+		email,
+		password,
+		phoneNumber,
+		role,
+		avatar,
+	}: UserCreateWithPwdDto) {
 		const users = await this.userModel.find({ $or: [{ email }, { phoneNumber }] }).lean();
 		const isExistByEmail = users.some((user) => user.email === email);
 		const isExistByPhoneNumber = users.some((user) => user.phoneNumber === phoneNumber);
@@ -64,12 +72,34 @@ export class UserService {
 			.lean();
 	}
 
+	async updateVerifiedEmail(id: string) {
+		if (!isValidObjectId(id)) throw new BadRequestException('User ID is invalid');
+
+		return this.userModel.findByIdAndUpdate(id, { isEmailVerified: true }, { new: true }).lean();
+	}
+
+	async findOneById(id: string) {
+		if (!isValidObjectId(id)) throw new BadRequestException('User ID is invalid');
+
+		const user = await this.userModel.findById(id).lean();
+		if (!user) throw new BadRequestException('User not found');
+
+		return user;
+	}
+
 	async findOneByEmail(email: string) {
-		return this.userModel.findOne({ email }).lean();
+		const user = await this.userModel.findOne({ email }).lean();
+		if (!user) throw new BadRequestException('User not found');
+
+		return user;
 	}
 
 	async findPasswordById(id: string) {
+		if (!isValidObjectId(id)) throw new BadRequestException('User ID is invalid');
+
 		const user = await this.userModel.findById(id).select('password').lean();
+		if (!user) throw new BadRequestException('User not found');
+
 		return user.password;
 	}
 }

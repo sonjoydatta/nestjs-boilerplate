@@ -13,8 +13,8 @@ export class UserEntity {
 	@RequiredProp({ index: true, unique: true })
 	email: string;
 
-	@RequiredProp({ select: false })
-	password: string;
+	@OptionalProp(null, { select: false })
+	password?: string;
 
 	@OptionalProp(null, { index: true })
 	phoneNumber?: string;
@@ -24,4 +24,7 @@ export class UserEntity {
 
 	@OptionalProp(null)
 	avatar?: string;
+
+	@OptionalProp(false)
+	isEmailVerified?: boolean;
 }

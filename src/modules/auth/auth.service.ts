@@ -1,4 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { isValidObjectId } from 'mongoose';
 
 import { JwtPayload, JwtService, TokenTypeEnum } from '@libs/jwt';
 import { comparePassword } from '@libs/utils';
@@ -8,6 +9,7 @@ import { MailService } from '../mail/mail.service';
 import { UserService } from '../user/user.service';
 import { AuthRegisterDto } from './dtos/auth.register.dto';
 import { AuthSignInDto } from './dtos/auth.signin.dto';
+import { AuthVerifyEmailDto } from './dtos/auth.verify-email.dto';
 
 @Injectable()
 export class AuthService {
@@ -51,6 +53,18 @@ export class AuthService {
 		});
 
 		return { ...user, accessToken, refreshToken };
+	}
+
+	async verifyEmail({ token }: AuthVerifyEmailDto) {
+		const { id } = await this.jwtService.verify(token, TokenTypeEnum.CONFIRMATION);
+		if (!isValidObjectId(id)) throw new BadRequestException('Token is invalid or expired');
+
+		const user = await this.userService.findOneById(id);
+		if (!user) throw new BadRequestException('Token is invalid or expired');
+
+		await this.userService.updateVerifiedEmail(id);
+
+		return 'Email has been verified';
 	}
 
 	private async generateAuthTokens(user: JwtPayload) {
