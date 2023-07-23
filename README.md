@@ -1,73 +1,69 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# NestJS API Boilerplate
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This is a boilerplate for NestJS API. It is based on the [NestJS](https://nestjs.com/) framework. It is a TypeScript starter repository.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Features
 
-## Description
+1. JWT Authentication library with access, refresh, confirmation, and reset tokens
+   1. `Access tokens` are used to authenticate users
+   2. `Refresh tokens` are used to refresh access tokens
+   3. `Confirmation tokens` are used to confirm user email addresses
+   4. `Reset tokens` are used to reset user passwords
+2. Redis library with `ioredis` to store blacklisted tokens
+3. Configured with `@nestjs/config` to load environment variables from `.env` files
+4. Configured with `@nestjs/swagger` to generate Swagger documentation and Swagger example is documented with `Faker.js`
+5. Configured with `@nestjs/mongoose` to connect to MongoDB
+6. Configured with Docker and Docker Compose
+7. Mailer library with `nodemailer` and `Handlebars` for templating
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Common Commands
 
-## Installation
+| Command        | Description                          |
+| -------------- | ------------------------------------ |
+| yarn start:dev | Start the server in development mode |
+| yarn build     | Build the app for production         |
+| yarn start     | Start the app in production mode     |
+| yarn lint      | Lint the code                        |
+| yarn format    | Format the code                      |
 
-```bash
-$ yarn install
-```
+## Environment Variables
 
-## Running the app
+There's a `.env.example` file in the `src/common/envs` directory. You can copy it to `.env`/`.env.development`/`.env.production` and set the values accordingly.
 
-```bash
-# development
-$ yarn run start
+## Quick start
 
-# watch mode
-$ yarn run start:dev
+1. You'll need to have Node >= 18.16.1 and yarn >= 1.22.19 on your machine
+2. Clone this repo using `git clone --depth=1 https://github.com/sonjoydatta/nestjs-boilerplate.git <YOUR_PROJECT_NAME>`
+3. Enter to the project directory: `cd <YOUR_PROJECT_NAME>`
+4. Run `yarn or npm install` in order to install dependencies
+5. At this point you can run `yarn start:dev or npm run start:dev` to see the app at `http://localhost:4000`
+6. You may need to a `.env` file. For development `.env.development`
 
-# production mode
-$ yarn run start:prod
-```
+## Docker
 
-## Test
+You can run the app with Docker and Docker Compose. There's a `docker-compose.yml` file in the root directory. You can run `docker-compose up` to start the app. You can also run `docker-compose up -d` to run the app in the background. You can run `docker-compose down` to stop the app.
 
-```bash
-# unit tests
-$ yarn run test
+## Swagger
 
-# e2e tests
-$ yarn run test:e2e
+You can access the Swagger UI at `http://localhost:{PORT}`. The default port is `4000`.
 
-# test coverage
-$ yarn run test:cov
-```
+## Acknowledgements
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- [TypeScript](https://www.typescriptlang.org/)
+- [NestJS](https://nestjs.com/)
+- [Swagger](https://swagger.io/)
+- [Faker.js](https://fakerjs.dev)
+- [MongoDB](https://www.mongodb.com/)
+- [Redis](https://redis.io/)
+- [class-transformer](https://www.npmjs.com/package/class-transformer)
+- [class-validator](https://www.npmjs.com/package/class-validator)
+- [Nodemailer](https://nodemailer.com/about/)
+- [Handlebars](https://handlebarsjs.com/)
+- [JWT](https://jwt.io/)
+- [bcrypt](https://www.npmjs.com/package/bcrypt)
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/)
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+This code is available under the MIT license. See the [LICENSE](LICENSE.md) file for more info.
